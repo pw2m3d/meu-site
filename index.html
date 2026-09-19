@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Biblioteca pessoal de vídeos, tutoriais e referências sobre impressão 3D.">
+  <title>Biblioteca de Impressão 3D</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --border: #334155;
+      --danger: #ef4444;
+      --youtube: #ff0033;
+      --instagram: #d946ef;
+      --shadow: 0 12px 30px rgba(0, 0, 0, .22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0b1120, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 48px 0 28px;
+    }
+
+    .hero {
+      background: rgba(17, 24, 39, .88);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .search {
+      width: 100%;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .search:focus,
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, .13);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #052e16;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, .12);
+      color: #fecaca;
+      border: 1px solid rgba(239, 68, 68, .35);
+    }
+
+    main {
+      padding-bottom: 50px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0 14px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .counter {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .categories {
+      display: grid;
+      gap: 18px;
+    }
+
+    .category {
+      background: rgba(17, 24, 39, .9);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: rgba(31, 41, 55, .55);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-header h3 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .category-body {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .link-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #0b1220;
+    }
+
+    .platform {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: .72rem;
+      letter-spacing: .4px;
+    }
+
+    .platform.youtube {
+      background: rgba(255, 0, 51, .13);
+      color: #ff6b81;
+      border: 1px solid rgba(255, 0, 51, .28);
+    }
+
+    .platform.instagram {
+      background: rgba(217, 70, 239, .13);
+      color: #f0abfc;
+      border: 1px solid rgba(217, 70, 239, .28);
+    }
+
+    .link-info {
+      min-width: 0;
+    }
+
+    .link-title {
+      margin: 0 0 5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .link-url {
+      display: block;
+      color: var(--muted);
+      font-size: .82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+
+    .link-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .open-link {
+      text-decoration: none;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: rgba(34, 197, 94, .12);
+      border: 1px solid rgba(34, 197, 94, .28);
+      color: #86efac;
+      font-weight: 700;
+      font-size: .88rem;
+    }
+
+    .delete-link {
+      display: none;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(239, 68, 68, .1);
+      border: 1px solid rgba(239, 68, 68, .25);
+      color: #fca5a5;
+      cursor: pointer;
+    }
+
+    .user-added .delete-link {
+      display: inline-block;
+    }
+
+    .form-panel {
+      margin: 28px 0 0;
+      background: rgba(17, 24, 39, .9);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-panel h2 {
+      margin: 0 0 6px;
+    }
+
+    .form-panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #cbd5e1;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      outline: none;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 26px;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 16px 0 34px;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 760px) {
+      .toolbar,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        grid-template-columns: auto 1fr;
+      }
+
+      .link-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+      }
+
+      .category-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <section class="hero" aria-labelledby="titulo-principal">
+        <h1 id="titulo-principal">Biblioteca de Impressão 3D</h1>
+        <p class="subtitle">
+          Tutoriais, configurações, manutenção, modelagem, vendas e referências para impressão 3D.
+        </p>
+
+        <div class="toolbar">
+          <input
+            id="searchInput"
+            class="search"
+            type="search"
+            placeholder="Pesquisar por título, categoria ou plataforma..."
+            aria-label="Pesquisar links"
+          >
+          <button class="btn btn-primary" type="button" onclick="scrollToForm()">
+            + Adicionar link
+          </button>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-title">
+      <h2>Conteúdos salvos</h2>
+      <span class="counter" id="counter"></span>
+    </div>
+
+    <div id="categories" class="categories"></div>
+
+    <section id="addFormSection" class="form-panel">
+      <h2>Adicionar novo título e link</h2>
+      <p>
+        Você pode usar uma categoria existente ou criar uma nova. Os links adicionados aqui ficam salvos no navegador.
+      </p>
+
+      <form id="linkForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="categorySelect">Categoria existente</label>
+            <select id="categorySelect">
+              <option value="">Selecione uma categoria...</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="newCategory">Ou crie uma nova categoria</label>
+            <input id="newCategory" type="text" placeholder="Ex.: Pintura e acabamento">
+          </div>
+
+          <div class="field full">
+            <label for="titleInput">Título</label>
+            <input id="titleInput" type="text" required placeholder="Ex.: Como ajustar suportes orgânicos">
+          </div>
+
+          <div class="field full">
+            <label for="urlInput">Link</label>
+            <input id="urlInput" type="url" required placeholder="https://...">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Salvar novo link</button>
+          <button class="btn btn-secondary" type="button" onclick="exportData()">Exportar meus links</button>
+          <button class="btn btn-secondary" type="button" onclick="document.getElementById('importFile').click()">
+            Importar links
+          </button>
+          <input id="importFile" type="file" accept=".json" hidden>
+          <button class="btn btn-danger" type="button" onclick="clearUserLinks()">Apagar apenas links adicionados</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    Biblioteca pessoal de estudos sobre impressão 3D • HTML5 + CSS + JavaScript
+  </footer>
+
+  <script>
+    const baseData = [
+      {
+        category: "Suportes e preparação da peça",
+        links: [
+          {
+            title: "Ensina a colocar suporte nas peças 3D",
+            url: "https://www.youtube.com/watch?v=83W5OUy3XqI"
+          },
+          {
+            title: "Ajuste de base para peças",
+            url: "https://www.instagram.com/reel/DcoNtTalLEx/?utm_source=ig_web_copy_link&igsi=NTc4MTIwNjQ2YQ=="
+          }
+        ]
+      },
+      {
+        category: "Dividir e separar modelos",
+        links: [
+          {
+            title: "Dividir modelos no Bambu Lab",
+            url: "https://www.youtube.com/watch?v=7iqUqlhribw"
+          },
+          {
+            title: "Dividir modelos no Bambu Lab — vídeo 2",
+            url: "https://www.youtube.com/watch?v=9WeoNvHyf_c"
+          },
+          {
+            title: "Dividir modelos no Bambu Lab — vídeo 3",
+            url: "https://www.youtube.com/watch?v=U-EhIo8nIlM"
+          },
+          {
+            title: "Dividir objeto 3D",
+            url: "https://www.instagram.com/reels/DcgsUo-B1OO/"
+          },
+          {
+            title: "Como separar um arquivo STL para multipartes na impressão 3D",
+            url: "https://www.youtube.com/watch?v=U-EhIo8nIlM"
+          }
+        ]
+      },
+      {
+        category: "Primeira camada e qualidade de impressão",
+        links: [
+          {
+            title: "Primeira camada da impressora 3D",
+            url: "https://www.youtube.com/watch?v=WAvj1bq0Og0"
+          },
+          {
+            title: "Primeira camada da impressora 3D — vídeo 2",
+            url: "https://www.youtube.com/watch?v=IqpOan63LHk"
+          },
+          {
+            title: "Melhorar configuração de resolução para peças pequenas",
+            url: "https://www.instagram.com/reels/Dcd7jjTRTYU/"
+          },
+          {
+            title: "Como tornar a superfície do objeto mais lisa",
+            url: "https://www.instagram.com/reel/DbRAkC2RkH8"
+          }
+        ]
+      },
+      {
+        category: "Filamentos e materiais",
+        links: [
+          {
+            title: "Conheça os principais filamentos de impressão 3D",
+            url: "https://www.youtube.com/watch?v=ODjE1TfA7Lc"
+          }
+        ]
+      },
+      {
+        category: "Modelagem e personalização",
+        links: [
+          {
+            title: "Texto em curva",
+            url: "https://www.instagram.com/reels/Dcb-I-op3Ef/"
+          }
+        ]
+      },
+      {
+        category: "Economia de material e purga",
+        links: [
+          {
+            title: "Dica para economizar material",
+            url: "https://www.instagram.com/reels/DbbkNQYvWwe/"
+          },
+          {
+            title: "Pare de jogar fora a torre de purga da impressão",
+            url: "https://www.youtube.com/shorts/769QSG8Fb2c"
+          },
+          {
+            title: "Torre de purga — ótima explicação",
+            url: "https://www.youtube.com/watch?v=8c_g24ngfCk"
+          }
+        ]
+      },
+      {
+        category: "Erros e solução de problemas",
+        links: [
+          {
+            title: "Erros de impressão",
+            url: "https://www.youtube.com/watch?v=ZEBXaWrqFZ8"
+          }
+        ]
+      },
+      {
+        category: "Manutenção da impressora",
+        links: [
+          {
+            title: "Como trocar o conjunto de aquecimento Hotend",
+            url: "https://www.youtube.com/shorts/HmfDFqWJ5aI"
+          }
+        ]
+      },
+      {
+        category: "Vendas, precificação e mercado",
+        links: [
+          {
+            title: "Como vender e precificar",
+            url: "https://www.youtube.com/watch?v=VmReLvxHN9Q"
+          },
+          {
+            title: "Mercado para imprimir",
+            url: "https://www.youtube.com/watch?v=ixx3mfRrJSg"
+          },
+          {
+            title: "Venda local",
+            url: "https://www.youtube.com/watch?v=atRJGYS5hZg"
+          }
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = "biblioteca3d_user_links_v1";
+    let userLinks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+    function getPlatform(url) {
+      if (url.includes("youtube.com") || url.includes("youtu.be")) {
+        return { name: "YT", className: "youtube", label: "YouTube" };
+      }
+
+      if (url.includes("instagram.com")) {
+        return { name: "IG", className: "instagram", label: "Instagram" };
+      }
+
+      return { name: "WEB", className: "", label: "Site" };
+    }
+
+    function allData() {
+      const map = new Map();
+
+      baseData.forEach(group => {
+        map.set(group.category, group.links.map(link => ({ ...link, userAdded: false })));
+      });
+
+      userLinks.forEach(item => {
+        if (!map.has(item.category)) {
+          map.set(item.category, []);
+        }
+
+        map.get(item.category).push({
+          title: item.title,
+          url: item.url,
+          id: item.id,
+          userAdded: true
+        });
+      });
+
+      return Array.from(map, ([category, links]) => ({ category, links }));
+    }
+
+    function render(filter = "") {
+      const container = document.getElementById("categories");
+      const search = filter.trim().toLowerCase();
+      const data = allData();
+
+      container.innerHTML = "";
+
+      let visibleLinks = 0;
+
+      data.forEach(group => {
+        const filteredLinks = group.links.filter(link => {
+          const platform = getPlatform(link.url).label;
+          const text = `${group.category} ${link.title} ${platform}`.toLowerCase();
+          return text.includes(search);
+        });
+
+        if (!filteredLinks.length) return;
+
+        visibleLinks += filteredLinks.length;
+
+        const section = document.createElement("section");
+        section.className = "category";
+
+        const header = document.createElement("div");
+        header.className = "category-header";
+
+        const title = document.createElement("h3");
+        title.textContent = group.category;
+
+        const amount = document.createElement("span");
+        amount.className = "counter";
+        amount.textContent = `${filteredLinks.length} link${filteredLinks.length === 1 ? "" : "s"}`;
+
+        header.append(title, amount);
+
+        const body = document.createElement("div");
+        body.className = "category-body";
+
+        filteredLinks.forEach(link => {
+          const platform = getPlatform(link.url);
+
+          const article = document.createElement("article");
+          article.className = `link-card${link.userAdded ? " user-added" : ""}`;
+
+          const badge = document.createElement("div");
+          badge.className = `platform ${platform.className}`;
+          badge.textContent = platform.name;
+          badge.title = platform.label;
+
+          const info = document.createElement("div");
+          info.className = "link-info";
+
+          const linkTitle = document.createElement("p");
+          linkTitle.className = "link-title";
+          linkTitle.textContent = link.title;
+
+          const linkUrl = document.createElement("a");
+          linkUrl.className = "link-url";
+          linkUrl.href = link.url;
+          linkUrl.target = "_blank";
+          linkUrl.rel = "noopener noreferrer";
+          linkUrl.textContent = link.url;
+
+          info.append(linkTitle, linkUrl);
+
+          const actions = document.createElement("div");
+          actions.className = "link-actions";
+
+          const open = document.createElement("a");
+          open.className = "open-link";
+          open.href = link.url;
+          open.target = "_blank";
+          open.rel = "noopener noreferrer";
+          open.textContent = "Abrir";
+
+          actions.appendChild(open);
+
+          if (link.userAdded) {
+            const remove = document.createElement("button");
+            remove.className = "delete-link";
+            remove.type = "button";
+            remove.textContent = "Excluir";
+            remove.onclick = () => removeUserLink(link.id);
+            actions.appendChild(remove);
+          }
+
+          article.append(badge, info, actions);
+          body.appendChild(article);
+        });
+
+        section.append(header, body);
+        container.appendChild(section);
+      });
+
+      const total = allData().reduce((sum, group) => sum + group.links.length, 0);
+      document.getElementById("counter").textContent =
+        search ? `${visibleLinks} de ${total} links encontrados` : `${total} links cadastrados`;
+
+      if (!visibleLinks) {
+        container.innerHTML = '<div class="empty">Nenhum conteúdo encontrado para sua pesquisa.</div>';
+      }
+
+      updateCategorySelect();
+    }
+
+    function updateCategorySelect() {
+      const select = document.getElementById("categorySelect");
+      const currentValue = select.value;
+      const categories = allData()
+        .map(item => item.category)
+        .sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+      select.innerHTML = '<option value="">Selecione uma categoria...</option>';
+
+      categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        select.appendChild(option);
+      });
+
+      if (categories.includes(currentValue)) {
+        select.value = currentValue;
+      }
+    }
+
+    function scrollToForm() {
+      document.getElementById("addFormSection").scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => document.getElementById("categorySelect").focus(), 350);
+    }
+
+    function saveUserLinks() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(userLinks));
+    }
+
+    function removeUserLink(id) {
+      userLinks = userLinks.filter(item => item.id !== id);
+      saveUserLinks();
+      render(document.getElementById("searchInput").value);
+    }
+
+    function clearUserLinks() {
+      if (!userLinks.length) {
+        alert("Não há links adicionados por você para apagar.");
+        return;
+      }
+
+      const confirmed = confirm("Deseja apagar todos os links que você adicionou? Os links originais continuarão no arquivo.");
+      if (!confirmed) return;
+
+      userLinks = [];
+      saveUserLinks();
+      render(document.getElementById("searchInput").value);
+    }
+
+    function exportData() {
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        userLinks
+      };
+
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+
+      a.href = url;
+      a.download = "meus-links-impressao-3d.json";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("importFile").addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = e => {
+        try {
+          const data = JSON.parse(e.target.result);
+          const imported = Array.isArray(data) ? data : data.userLinks;
+
+          if (!Array.isArray(imported)) {
+            throw new Error("Formato inválido");
+          }
+
+          const cleaned = imported
+            .filter(item => item && item.category && item.title && item.url)
+            .map(item => ({
+              id: item.id || `link_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+              category: String(item.category).trim(),
+              title: String(item.title).trim(),
+              url: String(item.url).trim()
+            }));
+
+          userLinks = [...userLinks, ...cleaned];
+          saveUserLinks();
+          render(document.getElementById("searchInput").value);
+          alert(`${cleaned.length} link(s) importado(s).`);
+        } catch {
+          alert("Não foi possível importar esse arquivo. Use um JSON exportado por esta página.");
+        } finally {
+          event.target.value = "";
+        }
+      };
+
+      reader.readAsText(file);
+    });
+
+    document.getElementById("linkForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const selectedCategory = document.getElementById("categorySelect").value.trim();
+      const newCategory = document.getElementById("newCategory").value.trim();
+      const title = document.getElementById("titleInput").value.trim();
+      const url = document.getElementById("urlInput").value.trim();
+
+      const category = newCategory || selectedCategory;
+
+      if (!category) {
+        alert("Selecione uma categoria existente ou crie uma nova.");
+        return;
+      }
+
+      userLinks.push({
+        id: `link_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        category,
+        title,
+        url
+      });
+
+      saveUserLinks();
+
+      document.getElementById("linkForm").reset();
+      render(document.getElementById("searchInput").value);
+
+      alert("Link adicionado com sucesso.");
+    });
+
+    document.getElementById("searchInput").addEventListener("input", event => {
+      render(event.target.value);
+    });
+
+    render();
+  </script>
+</body>
+</html>
