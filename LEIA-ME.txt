@@ -1,0 +1,29 @@
+PW2M 3D — CATÁLOGO DIGITAL COMPLETO
+===================================
+
+CONTEÚDO
+- index.html: página inicial do catálogo.
+- assets/: imagens otimizadas de todas as peças e logotipo.
+
+COMO ABRIR NO COMPUTADOR
+1. Descompacte todos os arquivos da pasta.
+2. Abra o arquivo index.html no Chrome, Edge, Firefox ou Safari.
+3. Mantenha a pasta assets ao lado do arquivo index.html.
+
+COMO PUBLICAR NO GITHUB PAGES
+1. Crie um repositório no GitHub.
+2. Envie index.html e a pasta assets na raiz do repositório.
+3. Vá em Settings > Pages.
+4. Configure Deploy from a branch, escolha main e / (root).
+5. Salve e abra o endereço informado pelo GitHub.
+
+ALTERNATIVA SEM PASTA
+- O arquivo PW2M_3D_Catalogo_Completo.html fornecido separadamente
+  contém todas as fotografias incorporadas e pode ser aberto offline.
+
+INFORMAÇÕES
+- 63 produtos em 6 coleções concluídas.
+- 3 coleções em prévia, aguardando fotos de produtos individuais.
+- Instagram: @pw2m_3d
+- Peças de Civilizações Eternas: a experiência NFC/QR está prevista;
+  confirmar ativação antes de vender como funcionalidade pronta.
